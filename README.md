@@ -7,3 +7,5 @@ main-edge.py performs the inference on the full PtychoNN model
 
 
 main-edge-sm.py performs the inference on the reduced PtychoNN model
+
+Models contain the pytorch model used for inference. This model takes in 516x516 input diffraction patterns and outputs the phase (128x128) alone. 
