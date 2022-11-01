@@ -8,5 +8,6 @@ The inference is done in batch processing with a batch size of 8 during the demo
 Steps to run the code. 
 
 1. In one terminal run the adSimServer.py, which will simulate a detector with either a random 128x128 images or from a presaved scan file (scan810.npy) 
-
+   python3 adSimServer.py -if ../diff_scan_810.npy -fps 10
+   
 2. Open another terminal and run the main-batch-test.py 
