@@ -10,4 +10,6 @@ Steps to run the code.
 1. In one terminal run the adSimServer.py, which will simulate a detector with either a random 128x128 images or from a presaved scan file (scan810.npy) 
    python3 adSimServer.py -if diff_scan_810.npy -fps 10
    
+   fps is the frame rate and the maximum possible frame rate with real-time feedback is 2000.
+   
 2. Open another terminal and run the main-batch-test.py 
