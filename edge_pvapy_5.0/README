@@ -1,5 +1,6 @@
 edgeptychoNN integrated with the latest pvapy5.0 
 
+Install pvapy5.0 using the command "conda install pvapy=5.0"
 pvapy5.0 has extended support for multiple GPUs in the backend. 
 
 On a single GPU - the base code can handle 2000 fps in real-time. 
