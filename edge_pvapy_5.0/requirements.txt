@@ -1,1 +1,25 @@
+Set up a miniconda environment 
+
+For example: sh Miniconda3-latest-Linux-x86_64.sh -b -p 3.9 # for python 3.9 
+
+
+source 3.9/bin/activate
+conda install "python>=3.9.12"
+
+conda create -n edgeptychoNN
+conda activate edgeptychoNN
+
+
+
+ pip install nvidia-pyindex
+ pip install nvidia-tensorrt
+ conda install pytorch torchvision -c pytorch
+ pip install torch-summary
+ pip install pycuda
+ 
+ conda install -c pvapy=5.0
+ 
+ 
+ 
+
 
