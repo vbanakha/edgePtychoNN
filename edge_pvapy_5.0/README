@@ -1,0 +1,59 @@
+edgeptychoNN integrated with the latest pvapy5.0 
+
+Install pvapy5.0 using the command "conda install pvapy=5.0"
+pvapy5.0 has extended support for multiple GPUs in the backend. 
+
+On a single GPU - the base code can handle 2000 fps in real-time. 
+The python script provided in this folder can extend the capability to 8000 fps with multiple consumers  
+
+Steps to run the code 
+============================================================
+Case 1: 
+
+1. Terminal 1: AD Sim server 
+  
+  pvapy-ad-sim-server -cn pvapy:image -nx 128 -ny 128 -dt int16 -fps 2000 -rt 60 -rp 2000
+  
+  
+  ## nx- frame size in x dimension ## dt- data type of the input 
+  ## ny- frame size in y dimension ## fps- frame per seconds
+  
+Terminal 2: HPC Consumer:
+#   - observe user stats
+#   - consumer keeps up, no frames lost
+
+pvapy-hpc-consumer --input-channel pvapy:image --control-channel inference:*:control --status-channel inference:*:status 
+--output-channel inference:*:output --processor-file inferPtychoNNImageProcessor.py --processor-class InferPtychoNNImageProcessor 
+--report-period 10 --server-queue-size 100
+============================================================
+Case 2: Batch Inference @ 4kHz, single consumer
+
+1. Terminal 1: AD Sim server 
+
+pvapy-ad-sim-server -cn pvapy:image -nx 128 -ny 128 -dt int16 -fps 4000 -rt 60 -rp 4000
+
+Terminal 2: HPC Consumer:
+#   - observe user stats
+#   - consumer keeps up, no frames lost
+
+pvapy-hpc-consumer --input-channel pvapy:image --control-channel inference:*:control --status-channel inference:*:status 
+--output-channel inference:*:output --processor-file inferPtychoNNImageProcessor.py 
+--processor-class InferPtychoNNImageProcessor --report-period 10 --server-queue-size 100 
+
+============================================================
+Case 3: Batch Inference @ 8kHz, single consumer
+
+1. Terminal 1: AD Sim server 
+
+pvapy-ad-sim-server -cn pvapy:image -nx 128 -ny 128 -dt int16 -fps 8000 -rt 60 -rp 8000
+
+# Terminal 2: HPC Consumer:
+#   - observe user stats
+#   - consumers can keep up
+
+$ pvapy-hpc-consumer --input-channel pvapy:image --control-channel inference:*:control --status-channel inference:*:status 
+--output-channel inference:*:output --processor-file inferPtychoNNImageProcessor.py 
+--processor-class InferPtychoNNImageProcessor --report-period 10 --server-queue-size 100 --n-consumers 4 --distributor-updates 8
+
+
+It has to be noted that the fps reported is purely dependent on the underlying GPU and these numberes were obtained on an RTX A6000 machine. 
