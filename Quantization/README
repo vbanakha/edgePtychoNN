@@ -1,3 +1,11 @@
 This code will help in quantizing the trained model to INT8 uisng pytorch static quantization 
 
 
+Need to have the same conda environment as mentioned in the requirements.txt 
+
+As of now, the quantized model cannot be export to ONNX as there is no support for it. 
+So currently the inference is run on CPU rather than GPU. 
+
+Export to ONNX can be implemented by referring to this link here: 
+
+https://docs.nvidia.com/deeplearning/tensorrt/pytorch-quantization-toolkit/docs/tutorials/quant_resnet50.html
